@@ -10,16 +10,17 @@
  */
 
 #include <msp430.h> 
-
+int counter = 0;
 int main(void)
 {
 	WDTCTL = WDTPW | WDTHOLD;	    /// stop watchdog timer
-	P1DIR |= BIT0;                 /// set PI.0 as output mode
+	P2DIR |= BIT1;                 /// set P2.1 as output mode
 	for(;;)
 	{
-	    P1OUT ^= BIT0;             ///toggle P1.0 pin
+	    P2OUT ^= BIT1;             ///toggle P2.1 pin
 	    unsigned long i;
 	    for(i = 0; i<20000;i++);
+	    counter++;
 	}
 
 	return 0;
