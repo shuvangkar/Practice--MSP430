@@ -7,8 +7,19 @@
 
 #include "timerA.h"
 
+uint32_t ms = 0;
 
+//Timer ISR
+#pragma vector = TIMER0_A0_VECTOR
+__interrupt void Timer_A_CCR0_ISR(void)
+{
+    ms++;
+}
 
+uint32_t millis()
+{
+    return ms;
+}
 void set_mcu_clock()
 {
     //Set MCLK = SMCLK = 1MHz
@@ -17,7 +28,8 @@ void set_mcu_clock()
 }
 void timerA_begin()
 {
-    TACCTL0 = CCIE; // Enable counter interrupt on counter compare register 0
+    TACCR0 = 0; //Initially, Stop the Timer
+    TACCTL0 |= CCIE; // Enable counter interrupt on counter compare register 0
 
     /*
      * IDx = Input divider
