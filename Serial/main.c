@@ -18,8 +18,8 @@ int main(void)
 
 	while(1)
 	{
-	    serial_print("Hello \n");
-	    serial_print_int(123);
+	    serial_print("\nValue : ");
+	    serial_print_int(-32766);
 	    for(long i = 0; i<40000;i++);
 	    P2OUT ^= BIT1;             ///toggle P2.1 pin
 

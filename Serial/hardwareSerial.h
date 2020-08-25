@@ -7,11 +7,8 @@
 
 #ifndef HARDWARESERIAL_H_
 #define HARDWARESERIAL_H_
-
 #include <msp430.h>
 #include <stdint.h>
-#include <stdio.h>
-#include <stdlib.h>
 
 void set_mcu_clock(void);
 void serial_begin(void);
