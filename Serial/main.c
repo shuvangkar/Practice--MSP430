@@ -12,9 +12,7 @@ int main(void)
 	WDTCTL = WDTPW | WDTHOLD;	// stop watchdog timer
 	set_mcu_clock();
 	serial_begin();
-	P2DIR |= BIT1;                 /// set P2.1 as output mode
-	
-
+	P2DIR |= BIT1;             // set P2.1 as output mode
 
 	while(1)
 	{

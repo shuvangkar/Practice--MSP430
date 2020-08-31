@@ -1,0 +1,66 @@
+/*
+ * nRF24_register.h
+ *
+ *  Created on: Aug 27, 2020
+ *      Author: Shuvangkar
+ */
+
+#ifndef NRF24_REGISTER_H_
+#define NRF24_REGISTER_H_
+
+/* Instructions */
+#define RF24_R_REGISTER    0x00
+#define RF24_W_REGISTER    0x20
+#define RF24_REGISTER_MASK 0x1F
+#define RF24_R_RX_PAYLOAD  0x61
+#define RF24_W_TX_PAYLOAD  0xA0
+#define RF24_FLUSH_TX      0xE1
+#define RF24_FLUSH_RX      0xE2
+#define RF24_REUSE_TX_PL   0xE3
+#define RF24_R_RX_PL_WID   0x60
+#define RF24_W_ACK_PAYLOAD 0xA8
+#define RF24_W_TX_PAYLOAD_NOACK 0xB0
+#define RF24_NOP           0xFF
+
+/* Register Map */
+#define RF24_CONFIG      0x00
+#define RF24_EN_AA       0x01
+#define RF24_EN_RXADDR   0x02
+#define RF24_SETUP_AW    0x03
+#define RF24_SETUP_RETR  0x04
+#define RF24_RF_CH       0x05
+#define RF24_RF_SETUP    0x06
+#define RF24_STATUS      0x07
+#define RF24_OBSERVE_TX  0x08
+#define RF24_CD          0x09
+#define RF24_RPD         0x09
+#define RF24_RX_ADDR_P0  0x0A
+#define RF24_RX_ADDR_P1  0x0B
+#define RF24_RX_ADDR_P2  0x0C
+#define RF24_RX_ADDR_P3  0x0D
+#define RF24_RX_ADDR_P4  0x0E
+#define RF24_RX_ADDR_P5  0x0F
+#define RF24_TX_ADDR     0x10
+#define RF24_RX_PW_P0    0x11
+#define RF24_RX_PW_P1    0x12
+#define RF24_RX_PW_P2    0x13
+#define RF24_RX_PW_P3    0x14
+#define RF24_RX_PW_P4    0x15
+#define RF24_RX_PW_P5    0x16
+#define RF24_FIFO_STATUS 0x17
+#define RF24_DYNPD       0x1C
+#define RF24_FEATURE     0x1D
+
+/*******Parameter value******/
+/**********Speed Flag*************/
+#define AIR_SPEED_1MB   0b11000111
+#define AIR_SPEED_2MB   0b11001111
+#define AIR_SPEED_250KB 0b11100111
+/**********TX Power***************/
+#define MINUS_18_DBM    0b11111001
+#define MINUS_12_DBM    0b11111011
+#define MINUS_06_DBM    0b11111101
+#define ZERO_DBM        0b11111111
+
+
+#endif /* NRF24_REGISTER_H_ */
