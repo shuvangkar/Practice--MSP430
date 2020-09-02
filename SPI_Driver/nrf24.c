@@ -5,7 +5,8 @@
  *      Author: sshuv
  */
 #include "nrf24.h"
-
+#include "nrf_usr_conf.h"
+#include "nRF24_register.h"
 
 //void nrf24_begin()
 //{
@@ -56,9 +57,19 @@ void nrf_tx_begin()
 
     //set tx power
     nrf_set_tx_power(MINUS_12_DBM);
+    //Set data pipe address
+    nrf_set_tx_addr(tx_pipe_addr,sizeof(tx_pipe_addr));
+#if defined(ACK_ON)
     //in TX mode only enable acknowledge only in data pipe 0
-    //Set pipe data pipe address
+     write_register(RF24_EN_AA,PIPE0_ACK);
     //set same address as pipe 0 address
+    nrf_set_rx_addr(tx_pipe_addr,sizeof(tx_pipe_addr),0);
+    //Set retransmit delay and count
+    write_register(RF24_SETUP_RETR, RETRANSMIT_OPCODE|RETRANSMIT_COUNT);
+
+
+#endif
+
 }
 
 void nrf_rx_begin()

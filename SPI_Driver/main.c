@@ -3,16 +3,6 @@
 #include "nrf24.h"
 
 
-/*********flash commands**********/
-#define WB_WRITE_ENABLE       0x06
-#define WB_WRITE_DISABLE      0x04
-#define WB_CHIP_ERASE         0xc7
-#define WB_READ_STATUS_REG_1  0x05
-#define WB_READ_DATA          0x03
-#define WB_PAGE_PROGRAM       0x02
-#define WB_JEDEC_ID           0x9f
-
-
 uint8_t res;
 uint8_t res2;
 
@@ -31,7 +21,7 @@ int main(void)
 //	res = spi_transfer(WB_READ_STATUS_REG_1);
 //	res2 = spi_transfer(0xFF);
 
-	P1DIR |= BIT7;
+//	P1DIR |= BIT7;
 
 	nrf_begin();
 	nrf_common_begin();
@@ -39,28 +29,10 @@ int main(void)
 
 	while(1)
 	{
-//	    CS_ENABLE();
-//	    res = spi_transfer(0x00);
-//	    res2 = spi_transfer(0xFF);
-//	    CS_DISABLE();
+//	    res = read_register(RF24_EN_AA);
+//	    res2 =read_register(RF24_SETUP_AW);
+//	    read_bytes_in_register(RF24_RX_ADDR_P0,read_buf,sizeof(read_buf));
 
-//	    write_register(RF24_CONFIG,0b01010111);
-	    nrf_set_tx_addr(tx_addr,sizeof(tx_addr));
-	    res = read_register(RF24_CONFIG);
-	    res2 =read_register(RF24_SETUP_AW);
-	    read_bytes_in_register(RF24_TX_ADDR,read_buf,sizeof(read_buf));
-
-//	    res = read_register(RF24_STATUS);
-//	    P1OUT |= BIT7;
-//	    CS_DISABLE();
-//	    CE_ENABLE();
-//	    P2OUT |= BIT1;
-//	    for(long i = 0; i<400000;i++);
-//	    CE_DISABLE();
-//	    CS_ENABLE();
-//	    P2OUT &=~(BIT1);
-//
-//	    P1OUT &= ~BIT7;
 	    for(long i = 0; i<400000;i++);
 	    P2OUT ^= BIT1;             ///toggle P2.1 pin
 	}

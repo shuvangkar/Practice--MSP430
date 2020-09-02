@@ -23,6 +23,7 @@ uint8_t write_bytes_in_register(uint8_t addr,uint8_t *payload,uint8_t len);
 uint8_t *read_bytes_in_register(uint8_t addr,uint8_t *bucket,uint8_t len);
 
 void nrf_set_tx_addr(uint8_t *addr,uint8_t len);
+void nrf_set_rx_addr(uint8_t *addr, uint8_t len, uint8_t pipe);
 
 void nrf_write_tx_payload(uint8_t *data, uint8_t len);
 uint8_t *read_rx_payload(uint8_t *data, uint8_t len);

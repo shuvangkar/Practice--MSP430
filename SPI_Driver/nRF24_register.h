@@ -71,4 +71,15 @@
 #define EN_ALL_INT      (0b000<<4)
 #define DIS_ALL_INT     (0b111<<4)
 
+/*********Acknowledgment**********/
+#define PIPE0_ACK  (1<<0)
+#define PIPE1_ACK  (1<<1)
+#define PIPE2_ACK  (1<<2)
+#define PIPE3_ACK  (1<<3)
+#define PIPE4_ACK  (1<<4)
+#define PIPE5_ACK  (1<<5)
+
+/***********Transmit delay and cocunt**/
+#define RETRANSMIT_OPCODE (((RETRANSMIT_DELAY-250)/250)<<4)
+
 #endif /* NRF24_REGISTER_H_ */

@@ -5,6 +5,7 @@
  *      Author: Shuvangkar
  */
 #include "NRF24_Driver.h"
+#include "nRF24_register.h"
 
 uint8_t nrf_status;
 
@@ -60,6 +61,14 @@ void nrf_set_tx_addr(uint8_t *addr,uint8_t len)
     write_bytes_in_register(RF24_TX_ADDR,addr,len);
 }
 
+void nrf_set_rx_addr(uint8_t *addr, uint8_t len, uint8_t pipe)
+{
+    if(pipe > 5)
+    {
+        pipe = 1;
+    }
+    write_bytes_in_register(RF24_RX_ADDR_P0+pipe,addr,len);
+}
 void write_tx_payload(uint8_t *data, uint8_t len)
 {
     write_bytes_in_register(RF24_W_TX_PAYLOAD,data,len);
@@ -73,7 +82,7 @@ void write_tx_payload(uint8_t *data, uint8_t len)
 }
 uint8_t *read_rx_payload(uint8_t *data, uint8_t len)
 {
-    read_bytes_in_register(RF24_R_RX_PAYLOAD,data,len);
+    return read_bytes_in_register(RF24_R_RX_PAYLOAD,data,len);
 }
 
 void flush_tx()

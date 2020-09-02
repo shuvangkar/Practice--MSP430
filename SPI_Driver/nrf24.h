@@ -7,7 +7,7 @@
 #include <stdint.h>
 #include "SPI.h"
 #include "NRF24_Driver.h"
-
+#include "nRF24_register.h"
 
 void nrf_begin();
 void nrf_common_begin();
