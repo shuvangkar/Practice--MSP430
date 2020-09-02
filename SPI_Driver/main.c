@@ -35,6 +35,7 @@ int main(void)
 
 	nrf_begin();
 	nrf_common_begin();
+	nrf_tx_begin();
 
 	while(1)
 	{
@@ -45,7 +46,7 @@ int main(void)
 
 //	    write_register(RF24_CONFIG,0b01010111);
 	    nrf_set_tx_addr(tx_addr,sizeof(tx_addr));
-	    res = read_register(RF24_RF_SETUP);
+	    res = read_register(RF24_CONFIG);
 	    res2 =read_register(RF24_SETUP_AW);
 	    read_bytes_in_register(RF24_TX_ADDR,read_buf,sizeof(read_buf));
 

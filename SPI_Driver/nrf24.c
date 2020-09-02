@@ -42,18 +42,33 @@ void nrf_common_begin()
     write_register(RF24_DYNPD, 0x00);
     //Set address width of the register
     nrf_set_addr_width(5);//
-    //Set basic Config
-    write_register(RF24_CONFIG,0b01111100);//Disable interrupt, 2 byte crc, power down, ptx mode
 
 }
 
 void nrf_tx_begin()
 {
-    //
+    //Set basic Config
+    write_register(RF24_CONFIG,
+                   DIS_ALL_INT   |
+                   CRC_EN_2_BYTE |
+                   PWR_DOWN      |
+                   TX_MODE);
+
+    //set tx power
     nrf_set_tx_power(MINUS_12_DBM);
+    //in TX mode only enable acknowledge only in data pipe 0
+    //Set pipe data pipe address
+    //set same address as pipe 0 address
 }
 
 void nrf_rx_begin()
 {
+
+    //Set basic Config
+    write_register(RF24_CONFIG,
+                   DIS_ALL_INT   |
+                   CRC_EN_2_BYTE |
+                   PWR_UP        |
+                   RX_MODE);
 
 }

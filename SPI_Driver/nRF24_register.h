@@ -62,5 +62,13 @@
 #define MINUS_06_DBM    (0b10<<1)
 #define ZERO_DBM        (0b11<<1)
 
+/*********Basic Configuration*****/
+#define TX_MODE         (0<<0)
+#define RX_MODE         (1<<0)
+#define PWR_UP          (1<<1)
+#define PWR_DOWN        (0<<1)
+#define CRC_EN_2_BYTE   (0b11<<2)
+#define EN_ALL_INT      (0b000<<4)
+#define DIS_ALL_INT     (0b111<<4)
 
 #endif /* NRF24_REGISTER_H_ */
