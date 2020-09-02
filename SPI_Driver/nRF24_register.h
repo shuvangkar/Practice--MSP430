@@ -53,14 +53,14 @@
 
 /*******Parameter value******/
 /**********Speed Flag*************/
-#define AIR_SPEED_1MB   0b11000111
-#define AIR_SPEED_2MB   0b11001111
-#define AIR_SPEED_250KB 0b11100111
+#define AIR_SPEED_1MB   (0b000<<3)
+#define AIR_SPEED_2MB   (0b001<<3)
+#define AIR_SPEED_250KB (0b100<<3)
 /**********TX Power***************/
-#define MINUS_18_DBM    0b11111001
-#define MINUS_12_DBM    0b11111011
-#define MINUS_06_DBM    0b11111101
-#define ZERO_DBM        0b11111111
+#define MINUS_18_DBM    (0b00<<1)
+#define MINUS_12_DBM    (0b01<<1)
+#define MINUS_06_DBM    (0b10<<1)
+#define ZERO_DBM        (0b11<<1)
 
 
 #endif /* NRF24_REGISTER_H_ */

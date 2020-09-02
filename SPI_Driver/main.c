@@ -16,6 +16,8 @@
 uint8_t res;
 uint8_t res2;
 
+uint8_t tx_addr[] = {'A','B','C','D','E'};
+uint8_t read_buf[5];
 int main(void)
 {
 	WDTCTL = WDTPW | WDTHOLD;	// stop watchdog timer
@@ -31,7 +33,8 @@ int main(void)
 
 	P1DIR |= BIT7;
 
-	nrf24_begin();
+	nrf_begin();
+	nrf_common_begin();
 
 	while(1)
 	{
@@ -41,9 +44,10 @@ int main(void)
 //	    CS_DISABLE();
 
 //	    write_register(RF24_CONFIG,0b01010111);
+	    nrf_set_tx_addr(tx_addr,sizeof(tx_addr));
 	    res = read_register(RF24_RF_SETUP);
 	    res2 =read_register(RF24_SETUP_AW);
-
+	    read_bytes_in_register(RF24_TX_ADDR,read_buf,sizeof(read_buf));
 
 //	    res = read_register(RF24_STATUS);
 //	    P1OUT |= BIT7;
