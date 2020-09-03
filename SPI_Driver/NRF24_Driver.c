@@ -123,4 +123,9 @@ void nrf_set_tx_dbm_speed(uint8_t power_speed)
     write_register(RF24_RF_SETUP, (power_speed)&0x2F);
 }
 
+void start_transmit()
+{
+
+}
+
 

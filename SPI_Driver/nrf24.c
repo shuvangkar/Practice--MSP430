@@ -25,6 +25,9 @@
 
 void nrf_begin()
 {
+    //Enable CE PIN as output mode
+    CE_PORT_SET();
+    CE_DISABLE(); //Disable TX, RX
     //begin SPI
     spi_begin();
     //send NOP

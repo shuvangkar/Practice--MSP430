@@ -14,9 +14,7 @@
 #define CS_PORT_OUT     P3OUT
 #define CS_PIN          BIT6
 
-#define CE_PORT_DIR     P3DIR
-#define CE_PORT_OUT     P3OUT
-#define CE_PIN          BIT7
+
 
 //#define CS_PORT_DIR     P1DIR
 //#define CS_PORT_OUT     P1OUT
@@ -27,9 +25,7 @@
 #define CS_ENABLE() (CS_PORT_OUT &= ~CS_PIN)
 #define CS_DISABLE() (CS_PORT_OUT |= CS_PIN)
 
-#define CE_PORT_SET() (CE_PORT_DIR |= CE_PIN)
-#define CE_ENABLE()   (CE_PORT_OUT |= CE_PIN)
-#define CE_DISABLE()  (CE_PORT_OUT &= ~CE_PIN)
+
 
 void spi_begin(void);
 uint8_t spi_transfer(uint8_t reg);
