@@ -12,7 +12,7 @@
 #include "SPI.h"
 #include "nRF24_register.h"
 
-#define AIR_DATA_SPEED  AIR_SPEED_2MB
+
 
 
 
@@ -33,7 +33,7 @@ void flush_rx();
 
 void nrf_set_addr_width(uint8_t width);
 void nrf_set_channel(uint8_t channel);
-void nrf_set_tx_power(uint8_t power);
+void nrf_set_tx_dbm_speed(uint8_t);
 //void nrf_set_air_speed(uint8_t speed);
 
 extern uint8_t nrf_status;

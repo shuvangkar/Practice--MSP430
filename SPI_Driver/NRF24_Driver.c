@@ -111,15 +111,16 @@ void nrf_set_addr_width(uint8_t width)
 
 void nrf_set_channel(uint8_t channel)
 {
+    //If channel exceeds rset value to 100 channel.
     if(channel > 125)
     {
-        channel = 0;
+        channel = 100;
     }
     write_register(RF24_RF_CH,(channel & 0b01111111));
 }
-void nrf_set_tx_power(uint8_t power)
+void nrf_set_tx_dbm_speed(uint8_t power_speed)
 {
-    write_register(RF24_RF_SETUP, (AIR_DATA_SPEED | power)&0x2F);
+    write_register(RF24_RF_SETUP, (power_speed)&0x2F);
 }
 
 

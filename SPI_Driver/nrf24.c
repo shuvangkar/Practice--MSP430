@@ -43,6 +43,8 @@ void nrf_common_begin()
     write_register(RF24_DYNPD, 0x00);
     //Set address width of the register
     nrf_set_addr_width(5);//
+    //Set channel
+    nrf_set_channel(RF_CHANNALE_NO);
 
 }
 
@@ -56,7 +58,7 @@ void nrf_tx_begin()
                    TX_MODE);
 
     //set tx power
-    nrf_set_tx_power(MINUS_12_DBM);
+    nrf_set_tx_dbm_speed(MINUS_12_DBM | AIR_DATA_SPEED);
     //Set data pipe address
     nrf_set_tx_addr(tx_pipe_addr,sizeof(tx_pipe_addr));
 #if defined(ACK_ON)
@@ -66,8 +68,6 @@ void nrf_tx_begin()
     nrf_set_rx_addr(tx_pipe_addr,sizeof(tx_pipe_addr),0);
     //Set retransmit delay and count
     write_register(RF24_SETUP_RETR, RETRANSMIT_OPCODE|RETRANSMIT_COUNT);
-
-
 #endif
 
 }
