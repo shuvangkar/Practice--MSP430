@@ -26,16 +26,17 @@ void nrf_set_tx_addr(uint8_t *addr,uint8_t len);
 void nrf_set_rx_addr(uint8_t *addr, uint8_t len, uint8_t pipe);
 
 void nrf_write_tx_payload(uint8_t *data, uint8_t len);
-uint8_t *read_rx_payload(uint8_t *data, uint8_t len);
+uint8_t *nrf_read_rx_payload(uint8_t *data, uint8_t len);
 
-void flush_tx();
-void flush_rx();
+void nrf_flush_tx();
+void nrf_flush_rx();
 
 void nrf_set_addr_width(uint8_t width);
 void nrf_set_channel(uint8_t channel);
 void nrf_set_tx_dbm_speed(uint8_t);
 
-void start_transmit();
+void nrf_start_transmit();
+void nrf_start_receive();
 //void nrf_set_air_speed(uint8_t speed);
 
 extern uint8_t nrf_status;

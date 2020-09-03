@@ -69,30 +69,26 @@ void nrf_set_rx_addr(uint8_t *addr, uint8_t len, uint8_t pipe)
     }
     write_bytes_in_register(RF24_RX_ADDR_P0+pipe,addr,len);
 }
-void write_tx_payload(uint8_t *data, uint8_t len)
+void nrf_write_tx_payload(uint8_t *data, uint8_t len)
 {
+    nrf_flush_tx();
     write_bytes_in_register(RF24_W_TX_PAYLOAD,data,len);
-//    CS_ENABLE();
-//    nrf_status = spi_transfer(RF24_W_TX_PAYLOAD);
-//    for(uint8_t i = 0; i < len; i++)
-//    {
-//        spi_transfer(data[i]);
-//    }
-//    CS_DISABLE();
 }
-uint8_t *read_rx_payload(uint8_t *data, uint8_t len)
+uint8_t *nrf_read_rx_payload(uint8_t *data, uint8_t len)
 {
-    return read_bytes_in_register(RF24_R_RX_PAYLOAD,data,len);
+    uint8_t *ptr = read_bytes_in_register(RF24_R_RX_PAYLOAD,data,len);
+    nrf_flush_rx();
+    return ptr;
 }
 
-void flush_tx()
+void nrf_flush_tx()
 {
     CS_ENABLE();
     nrf_status = spi_transfer(RF24_FLUSH_RX);
     CS_DISABLE();
 
 }
-void flush_rx()
+void nrf_flush_rx()
 {
     CS_ENABLE();
     nrf_status = spi_transfer(RF24_REUSE_TX_PL);
@@ -123,9 +119,15 @@ void nrf_set_tx_dbm_speed(uint8_t power_speed)
     write_register(RF24_RF_SETUP, (power_speed)&0x2F);
 }
 
-void start_transmit()
+void nrf_start_transmit()
 {
-
+    CE_ENABLE();
+    delay_us(15);
+    CE_DISABLE();
 }
 
+void nrf_start_receive()
+{
+    CE_ENABLE();
+}
 

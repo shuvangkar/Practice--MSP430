@@ -6,6 +6,14 @@
  */
 #include "general.h"
 
+
+void delay_us(uint32_t us)
+{
+    do
+    {
+        __delay_cycles(1);
+    }while(--us);
+}
 void delay(int32_t ms)
 {
     do

@@ -36,6 +36,7 @@ int main(void)
 	    for(long i = 0; i<400000;i++);
 	    P2OUT ^= BIT1;             ///toggle P2.1 pin
 	}
+	nrf_start_transmit();//Strat Trasnmission
 
 	return 0;
 }
