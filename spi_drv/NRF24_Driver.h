@@ -7,14 +7,16 @@
 
 #ifndef NRF24_DRIVER_H_
 #define NRF24_DRIVER_H_
+#include <msp430.h>
 #include <stdint.h>
 #include "general.h"
 #include "SPI.h"
 #include "nRF24_register.h"
 
 
-
-
+#define CE_PORT_SET() (CE_PORT_DIR |= CE_PIN)
+#define CE_ENABLE()   (CE_PORT_OUT |= CE_PIN)
+#define CE_DISABLE()  (CE_PORT_OUT &= ~CE_PIN)
 
 uint8_t read_register(uint8_t addr);
 uint8_t write_register(uint8_t addr, uint8_t data);
@@ -38,6 +40,10 @@ void nrf_set_tx_dbm_speed(uint8_t);
 void nrf_start_transmit();
 void nrf_start_receive();
 //void nrf_set_air_speed(uint8_t speed);
+
+
+
+
 
 extern uint8_t nrf_status;
 #endif /* NRF24_DRIVER_H_ */

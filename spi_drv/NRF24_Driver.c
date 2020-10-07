@@ -6,6 +6,8 @@
  */
 #include "NRF24_Driver.h"
 #include "nRF24_register.h"
+#include "general.h"
+#include "nrf_usr_conf.h"
 
 uint8_t nrf_status;
 
@@ -121,13 +123,13 @@ void nrf_set_tx_dbm_speed(uint8_t power_speed)
 
 void nrf_start_transmit()
 {
-    CE_ENABLE();
-    delay_us(15);
-    CE_DISABLE();
+//    CE_ENABLE();
+//    delay_us(15);
+//    CE_DISABLE();
 }
 
 void nrf_start_receive()
 {
-    CE_ENABLE();
+//    CE_ENABLE();
 }
 

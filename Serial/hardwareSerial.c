@@ -17,6 +17,9 @@
     #define UCA0BR0_VAL     104
     #define UCA0BR1_VAL     0
     #define UCA0MCTL_VAL    UCBRS_1
+//    #define UCA0BR0_VAL     0x41
+//    #define UCA0BR1_VAL     0x3
+//    #define UCA0MCTL_VAL    UCBRS_2
 #elif BAUD == 19200
     #define UCA0BR0_VAL     52
     #define UCA0BR1_VAL     0
@@ -40,9 +43,9 @@
 
 void serial_begin(void)
 {
+    UCA0CTL1 |= UCSWRST;        //USCI logic held in reset state means disabled
     P1SEL |= BIT1+BIT2;         //PxSEL & PxSEL2 both registers select the pin attribute
     P1SEL2 |= BIT1+BIT2;        //P1.1 = RXD | P1.2 = TXD
-    UCA0CTL1 |= UCSWRST;        //USCI logic held in reset state means disabled
 
     UCA0CTL1 |= UCSSEL_2;       //SMCLK clock source
 
@@ -57,10 +60,15 @@ void serial_begin(void)
 //    IE2 |= UCA0TXIE;                  // Enable the Transmit interrupt
 //    _BIS_SR(GIE);                     // Enable the global interrupt
 }
+
+void serial_print_char(char c)
+{
+    UCA0TXBUF = c;
+    while(UCA0STAT & UCBUSY);
+}
+
 void serial_print(char *str)
 {
-//    tx_ptr = str;
-
     while(*str)
     {
         UCA0TXBUF = *str;
@@ -70,13 +78,76 @@ void serial_print(char *str)
 }
 
 
-
-
-void serial_print_int(int var)
+void serial_print_ulong(uint32_t n)
 {
-    char buf[10];
-    serial_print(int_to_str(var,buf));
+    char buf[13];
+    char *ptr = &buf[sizeof(buf) - 1];
+    *ptr = '\0';
+
+    uint32_t  temp;
+    char c;
+    do
+    {
+        temp = n;
+        n = n/10;
+        c = temp - n*10;
+        *--ptr = c + '0';
+    }while(n);
+    serial_print(ptr);
 }
+
+void serial_print_long(int32_t n)
+{
+    if(n<0)
+    {
+        serial_print_char('-');
+        n = -n;
+    }
+    serial_print_ulong(n);
+}
+void serial_print_uint(uint16_t n)
+{
+    serial_print_ulong(n);
+}
+
+void serial_print_int(int16_t n)
+{
+    serial_print_long(n);
+}
+
+
+
+//void serial_print_int(int var)
+//{
+//    char buf[10];
+//    serial_print(int_to_str(var,buf));
+//}
+//
+//void serial_print_int2(int n)
+//{
+//    char buf[10];
+//    char *ptr = &buf[sizeof(buf)-1];
+//    *ptr = '\0';
+//    bool neg = false;
+//    if(n < 0)
+//    {
+//        n = -n;
+//        neg = true;
+//    }
+//    do
+//    {
+//        uint16_t m = n;
+//        n = n/10;
+//        char c = m-10*n;
+//        *--ptr = c+'0';
+//    }while(n);
+//
+//    if(neg)
+//    {
+//        *--ptr = '-';
+//    }
+//    serial_print(ptr);
+//}
 
 void set_mcu_clock(void)
 {
